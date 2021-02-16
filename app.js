@@ -18,7 +18,8 @@ app.use(helmet());
 //Set up mongoose connection
 var mongoose = require('mongoose');
 var dev_db_url = 'mongodb+srv://mr-g:ONKAesamAUf39yg6@cluster0.kdalz.mongodb.net/local_library?retryWrites=true&w=majority';
-var mongoDB = `${process.env.URI}` || dev_db_url;
+var mongoDB = process.env.URI || dev_db_url;
+mongoose.Promise = global.Promise;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
